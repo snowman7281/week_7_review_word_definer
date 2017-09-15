@@ -1,14 +1,18 @@
 module WordsList
   class Words
     attr_reader :words
-    @@word_list = {}
+    @@words_list = {}
 
     def initialize(attributes)
-      @words = {}
+      @words = attributes.fetch(:words)
     end
 
-    def add_word(word, definition)
-      @words[definition] = word
+    def self.clear_all
+      @@words_list = {}
     end
 
+    def add_word(word)
+      @words = word
+    end
   end
+end
