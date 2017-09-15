@@ -55,4 +55,13 @@ describe('WordsLis::Words') do
     banana = WordsList::Words.new({:words => "Banana"})
     expect(WordsList::Words.find("Banana")).to(eq("Sorry can not find word"))
   end
+
+  it "can clear words list" do
+    apple = WordsList::Words.new({:words => "Apple"})
+    apple.save
+    banana = WordsList::Words.new({:words => "Banana"})
+    banana.save
+    WordsList::Words.clear_all
+    expect(WordsList::Words.all).to(eq({}))
+  end
 end

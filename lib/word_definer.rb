@@ -10,10 +10,6 @@ module WordsList
       @definitions = {}
     end
 
-    def self.clear_all
-      @@words_list = {}
-    end
-
     def save
       words = @words
       if @@words_list.has_key?(words)
@@ -43,5 +39,10 @@ module WordsList
     def self.all
       @@words_list
     end
+
+    def self.clear_all
+      @@words_list = {}
+    end
+    
   end
 end
