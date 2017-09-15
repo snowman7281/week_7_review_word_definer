@@ -1,10 +1,13 @@
 module WordsList
   class Words
+
+    attr_reader :definitions
     attr_accessor :words
     @@words_list = {}
 
     def initialize(attributes)
-      @words = {}
+      @words = attributes.fetch(:words)
+      @definitions = {}
     end
 
     def self.clear_all
@@ -12,17 +15,25 @@ module WordsList
     end
 
     def save
-      @words = words
+      words = @words
       if @@words_list.has_key?(words)
-        return "That word is already defined in the list."
+        return words + " is already defined in the list. Please enter another word."
       else
         @@words_list[words] = self
         return nil
       end
     end
 
-    def add_word(word, definition)
-      @words[definition] = word
+    def self.find(words)
+      if @@words_list.has_key?(words)
+        return @@words_list[words]
+      else
+        return "Sorry can not find word"
+      end
+    end
+
+    def add_word(words)
+      @words = words
     end
 
     def self.all

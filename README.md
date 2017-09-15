@@ -18,12 +18,15 @@ _You can view this app online [here](). To set up on your own machine, follow th
 
 ## Specifications
 
-* Words class stores a users words to a list.
+* Words class stores a user's words to a list.
   * Example input: cat
   * Example output: cat
 * Words class allows user to add definitions to words list.
   * Example input: dog
   * Example output: bark
+* Words class allows multiple definitions for the word.
+  * Example input: apple
+  * Example output: {:apple => :red, :apple => :fruit}
 * Words class can provide list of all words objects.
   * Example input: Words.all
   * Example output: [dog, cat, apple]
