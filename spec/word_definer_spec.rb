@@ -64,4 +64,11 @@ describe('WordsLis::Words') do
     WordsList::Words.clear_all
     expect(WordsList::Words.all).to(eq({}))
   end
+
+  it "can delete a word object from the word list" do
+    apple = WordsList::Words.new({:words => "Apple"})
+    apple.save
+    apple.delete
+    expect(WordsList::Words.all).to(eq({}))
+  end
 end

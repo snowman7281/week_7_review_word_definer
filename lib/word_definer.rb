@@ -43,6 +43,14 @@ module WordsList
     def self.clear_all
       @@words_list = {}
     end
-    
+
+    def delete
+      word = @words
+      if @@words_list.has_key?(word)
+        @@words_list.delete(word)
+      else
+        return "Sorry can not find word."
+      end
+    end
   end
 end
