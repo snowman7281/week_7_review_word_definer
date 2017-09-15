@@ -12,8 +12,13 @@ module WordsList
     end
 
     def save
-      @@words_list[words] = self
-      return nil
+      @words = words
+      if @@words_list.has_key?(words)
+        return "That word is already defined in the list."
+      else
+        @@words_list[words] = self
+        return nil
+      end
     end
 
     def add_word(word, definition)

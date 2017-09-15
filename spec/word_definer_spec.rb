@@ -29,4 +29,13 @@ describe('WordsLis::Words') do
     expect(apple.words).to(eq({ "Apple" => "Red Fruit"}))
   end
 
+  it "does not allow a user to save a new word that already exist in the list" do
+    apple = WordsList::Words.new({})
+    apple.add_word("Red Fruit", "Apple")
+    apple.save
+    apple = WordsList::Words.new({})
+    apple.add_word("Red Fruit", "Apple")
+    expect(apple.save).to(eq("That word is already defined in the list."))
+  end
+
 end
