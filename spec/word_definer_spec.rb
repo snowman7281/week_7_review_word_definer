@@ -49,4 +49,10 @@ describe('WordsLis::Words') do
     expect(WordsList::Words.find("Banana")).to(eq(banana))
   end
 
+  it "returns an error when contact is not saved" do
+    apple = WordsList::Words.new({:words => "Apple"})
+    apple.save
+    banana = WordsList::Words.new({:words => "Banana"})
+    expect(WordsList::Words.find("Banana")).to(eq("Sorry can not find word"))
+  end
 end
