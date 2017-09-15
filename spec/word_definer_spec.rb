@@ -18,4 +18,8 @@ describe('WordsLis::Words') do
     expect(apple.words).to(eq({ "Apple" => "Red Fruit"}))
   end
 
+  it "provides list of all words objects" do
+    expect(WordsList::Words.all).to(eq({}))
+  end
+
 end

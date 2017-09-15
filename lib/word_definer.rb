@@ -14,5 +14,9 @@ module WordsList
     def add_word(word, definition)
       @words[definition] = word
     end
+
+    def self.all
+      @@words_list
+    end
   end
 end
