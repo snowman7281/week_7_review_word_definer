@@ -18,6 +18,13 @@ describe('WordsLis::Words') do
     expect(apple.definitions).to(eq({"Snowman" => "Red Fruit"}))
   end
 
+  it "stores definition to the word on the list" do
+    apple = WordsList::Words.new({:words => "Apple"})
+    apple.add_definitions("Red Fruit", "Snowman")
+    apple.add_definitions("Crunch", "King of the North")
+    expect(apple.definitions).to(eq({"Snowman" => "Red Fruit", "King of the North" => "Crunch"}))
+  end
+
   it "provides list of all words objects" do
     expect(WordsList::Words.all).to(eq({}))
   end
