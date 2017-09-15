@@ -36,6 +36,10 @@ module WordsList
       @words = words
     end
 
+    def add_definitions(definitions, author)
+      @definitions[author] = definitions
+    end
+
     def self.all
       @@words_list
     end
