@@ -22,4 +22,11 @@ describe('WordsLis::Words') do
     expect(WordsList::Words.all).to(eq({}))
   end
 
+  it "allows user to save a contact to view later" do
+    apple = WordsList::Words.new({})
+    apple.add_word("Red Fruit", "Apple")
+    apple.save
+    expect(apple.words).to(eq({ "Apple" => "Red Fruit"}))
+  end
+
 end

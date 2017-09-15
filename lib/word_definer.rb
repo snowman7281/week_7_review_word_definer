@@ -11,6 +11,11 @@ module WordsList
       @@words_list = {}
     end
 
+    def save
+      @@words_list[words] = self
+      return nil
+    end
+
     def add_word(word, definition)
       @words[definition] = word
     end
