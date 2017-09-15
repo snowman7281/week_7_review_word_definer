@@ -1,53 +1,53 @@
 module WordsList
   class Words
+    @@word_list = {}
 
-    attr_reader :definitions
-    attr_accessor :words
-    @@words_list = {}
+    attr_reader :definition
+    attr_accessor :word
 
     def initialize(attributes)
-      @words = attributes.fetch(:words)
-      @definitions = {}
+      @word = attributes.fetch(:word)
+      @definition = {}
     end
 
     def save
-      words = @words
-      if @@words_list.has_key?(words)
-        return words + " is already defined in the list. Please enter another word."
+      words = @word
+      if @@word_list.has_key?(word)
+        return word + " is already defined in the list. Please enter another word."
       else
-        @@words_list[words] = self
+        @@word_list[word] = self
         return nil
       end
     end
 
-    def self.find(words)
-      if @@words_list.has_key?(words)
-        return @@words_list[words]
+    def self.find(word)
+      if @@word_list.has_key?(word)
+        return @@word_list[word]
       else
         return "Sorry can not find word"
       end
     end
 
-    def add_word(words)
-      @words = words
+    def add_word(word)
+      @word = word
     end
 
-    def add_definitions(definitions, author)
-      @definitions[author] = definitions
+    def add_definitions(definition, author)
+      @definition[author] = definition
     end
 
     def self.all
-      @@words_list
+      @@word_list
     end
 
     def self.clear_all
-      @@words_list = {}
+      @@word_list = {}
     end
 
     def delete
-      word = @words
-      if @@words_list.has_key?(word)
-        @@words_list.delete(word)
+      word = @word
+      if @@word_list.has_key?(word)
+        @@word_list.delete(word)
       else
         return "Sorry can not find word."
       end

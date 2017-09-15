@@ -1,0 +1,19 @@
+<h1><%= @word %></h1>
+
+<% if !@word.definition.empty? %>
+  <h3>Definition</h3>
+  <% @word.defintion.each do |definition, author| %>
+    <p><strong><%= definition %> : <%= author %></strong></p>
+  <% end %>
+<% end %>
+
+<form action="/edit/<%= @word %>" method="post">
+  <button type="submit" class="btn">Add Definition</button>
+</form>
+
+
+<form action="/delete/<%= @word %>" method="post">
+  <button type="submit" class="btn">Delete</button>
+</form>
+
+<a href="/"><button class="btn">Back to Words List</button></a>
