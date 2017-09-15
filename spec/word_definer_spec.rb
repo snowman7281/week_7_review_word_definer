@@ -7,9 +7,15 @@ describe('WordsLis::Words') do
     WordsList::Words.clear_all
   end
 
-  it "stores a word into a list" do
-    apple = WordsList::Words.new({:words => "Apple"})
-    expect(apple.words).to(eq("Apple"))
+  # it "stores a word into a list" do
+  #   apple = WordsList::Words.new({:words => "Apple"})
+  #   expect(apple.words).to(eq("Apple"))
+  # end
+
+  it "stores a word and definition into a list" do
+    apple = WordsList::Words.new({})
+    apple.add_word("Red Fruit", "Apple")
+    expect(apple.words).to(eq({ "Apple" => "Red Fruit"}))
   end
 
 end

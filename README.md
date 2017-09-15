@@ -18,7 +18,7 @@ _You can view this app online [here](). To set up on your own machine, follow th
 
 ## Specifications
 
-* Words class stores a user's words to a list.
+* Words class stores a users words to a list.
   * Example input: cat
   * Example output: cat
 * Words class allows user to add definitions to words list.
