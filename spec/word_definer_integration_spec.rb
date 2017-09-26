@@ -1,49 +1,33 @@
-require './app'
 require 'capybara/rspec'
+require './app'
+
 Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
-describe('Kids Words and Definitions List', {:type => :feature}) do
-  it "saves a new word and shows in list" do
+
+describe('Kids can click on a link to add new words', {:type => :feature}) do
+  it('Kids can add a new word to the list') do
     visit('/')
-    fill_in('word-input', :with => "Apple")
-    click_button("Add")
-    expect(page).to have_content("Apple")
+    click_link('Add a new word')
+    expect(page).to have_content('Enter a word!')
   end
 
-  it "shows error message when user adds word that already exists" do
-      visit('/')
-      fill_in('word-input', :with => "Apple")
-      click_button("Add")
-      expect(page).to have_content("Apple is already defined in the list. Please enter another word.")
-    end
-
-  # it "does not add blank phone/email/addresses to contact" do
-  #   visit('/')
-  #   click_link('Apple')
-  #   click_button('Edit')
-  #   click_button('Update')
-  #   expect(page).to have_no_content('Default:')
-  # end
-
-  it "allows user to add multiple phone/email/address entries" do
-    visit('/')
-    click_link('Apple')
-    click_button('Edit')
-    fill_in('definition-input-1', :with => "Red Fruit")
-    fill_in('author-input-1', :with => "Snowman")
-    click_button('Update')
-    expect(page).to have_content("Definition: Red Fruit")
-    expect(page).to have_content("Author: Snowman")
+  it('kids can enter a word') do
+    visit('/words/new')
+    fill_in('word', :with => 'hello')
+    click_button('Add Word')
+    expect(page).to have_content('Word is now added!')
   end
 
-  it "allows user to delete words" do
-    visit('/')
-    click_link('Apple')
-    click_button('Delete')
-    expect(page).to have_content("Apple has been deleted.")
-    click_link("Back to Words List")
-    expect(page).to have_no_content('Apple')
+  it('kids can see the word they entered') do
+    visit('/words')
+    expect(page).to have_content('hello')
+  end
+
+  it('kids can click a link to add a definition') do
+    visit('/words')
+    click_link('hello')
+    expect(page).to have_content('Add Definition')
   end
 
 end

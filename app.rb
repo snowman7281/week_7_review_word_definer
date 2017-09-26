@@ -1,58 +1,45 @@
 require 'sinatra'
 require 'sinatra/reloader'
-also_reload 'lib/**/*.rb'
 require './lib/word_definer'
+require './lib/definition'
+require 'pry'
 
+also_reload('lib/**/*.rb')
 
 get('/') do
-  @error = nil
-  @word = WordsList::Words.all
-  erb(:words_list)
+  erb(:index)
 end
 
-post('/') do
-  attributes = {:word => params["word-input"]}
-  word = WordsList::Words.new(attributes)
-  word.save
-  @word = WordsList::Words.all
-  erb(:words_list)
-end
-
-get('/word/:word_route') do
-  word = params[:word_route].split('_').join(' ')
-  @word = WordsList::Words.find(word)
+get('/words') do
+  @words = Word.all
   erb(:words)
 end
 
-post('/word_edit/:word_route') do
-  word = params[:word_route].split('_').join(' ')
-  @word = WordsList::Words.find(word)
-  erb(:word_edit)
+
+get('/words/new') do
+  erb(:words_formpage)
 end
 
-post('/words/:word_route') do
-  word = params[:word_route].split('_').join(' ')
-  @word = WordsList::Words.find(word)
-  @word.word = params["word-input"]
+post('/words') do
+  word = params.fetch('word')
+  Word.new({:word => word}).save
+  @words = Word.all
+  erb(:success)
+end
 
-  count = 0
-  while params.has_key?("definition-input-" + count.to_s)
-    definition_input = params["definition-input-" + count.to_s]
-    if definition_input.length != 0
-      author_input = params["author-input" + count.to_s]
-      if author_input.length == 0
-        @word.add_definitions(definition_input)
-      else
-        @word.add_definitions(definition_input, author_input)
-      end
-    end
-    count += 1
-  end
+get('/words/:id') do
+  @word = Word.find(params.fetch('id').to_i)
+  erb(:word)
+end
 
-  post("/delete/:word_route") do
-    @word_word = params[:word_route].split('_').join(' ')
-    word.delete
-    erb("delete")
-  end
+get('/words/:id/definitions/new') do
+  @word = Word.find(params.fetch('id').to_i)
+  erb(:definition_form)
+end
 
+post('/words/:id') do
+  definition = params.fetch('definition')
+  @word = Word.find(params.fetch('word_id').to_i)
+  @word.add_definitions(Definition.new({:definition => definition}))
+  erb(:success)
 end

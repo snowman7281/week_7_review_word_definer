@@ -1,0 +1,10 @@
+<h4>Add a definition for the "<%= @word.word %>" </h4>
+
+<form action='/words/:id' method='post'>
+  <input id='word_id' name='word_id' type='hidden' value='<%=@word.id%>'>
+  <div class='form-group'>
+    <label for='definition'><%= @word.word %> Definition:</label>
+    <input type='text' name='definition'>
+    <button type='submit' class='btn'>Add</button>
+  </div>
+</form>
